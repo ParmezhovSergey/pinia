@@ -13,7 +13,7 @@
 <script setup lang="ts">
 import { useRouter } from "vue-router";
 import { useUsersStore } from "../stores/usersStore";
-import UsersList from "@/components/usersList.vue";
+import UsersList from "@/components/UsersList.vue";
 
 const usersStore = useUsersStore();
 usersStore.fetchUsers();
