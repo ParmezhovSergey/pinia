@@ -50,7 +50,7 @@ const addLogin = () => {
   ) {
     right.value = true;
     router.push(`/users`);
-    console.log("add", right.value);
+    console.log("add", usersStore.auth);
   }
 };
 </script>
