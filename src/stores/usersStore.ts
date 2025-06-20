@@ -19,7 +19,10 @@ interface IAuth {
 export const useUsersStore = defineStore("usersStore", {
   state: () => ({
     users: [] as IUser[],
-    auth: {} as IAuth,
+    auth: {
+      login: 'user',
+      pass: 'pass'
+    } as IAuth,
   }),
 
   getters: {},
@@ -28,8 +31,8 @@ export const useUsersStore = defineStore("usersStore", {
     async fetchUsers() {
       const settings = await getUsers();
       this.users = settings.users;
-      this.auth = settings.auth;
-      console.log("post", settings.auth);
+      
+      console.log("post", settings);
     },
   },
 });
