@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { getUsers } from "./api";
 
-interface IUser {
+export interface IUser {
   id: number;
   name: string;
   age: number;

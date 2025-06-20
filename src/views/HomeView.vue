@@ -27,6 +27,7 @@
       <div class="btn">
         <button @click="addLogin">Войти</button>
       </div>
+      <div v-if="right" class="errorText">Неправильно введены данные</div>
     </div>
   </div>
 </template>
@@ -48,9 +49,10 @@ const addLogin = () => {
     login.value.login === usersStore.auth.login &&
     login.value.pass === usersStore.auth.pass
   ) {
-    right.value = true;
     router.push(`/users`);
-    console.log("add", usersStore.auth);
+    right.value = false;
+  } else {
+    right.value = true;
   }
 };
 </script>
@@ -100,5 +102,11 @@ const addLogin = () => {
   display: flex;
   justify-content: flex-end;
   margin-right: 20px;
+}
+.errorText {
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
+  color: red;
 }
 </style>
