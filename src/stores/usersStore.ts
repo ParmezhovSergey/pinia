@@ -1,27 +1,35 @@
 import { defineStore } from "pinia";
 import { getUsers } from "./api";
 
-export interface IUser {
+interface IUser {
   id: number;
   name: string;
   age: number;
   city: string;
 }
-
-export interface initialState {
-  users: Array<IUser>;
+interface IAuth {
+  login: string;
+  pass: string;
 }
+
+// interface initialState {
+//   users: Array<IUser>;
+// }
 
 export const useUsersStore = defineStore("usersStore", {
   state: () => ({
-    users:  [] as IUser[],
+    users: [] as IUser[],
+    auth: {} as IAuth,
   }),
+
   getters: {},
+
   actions: {
     async fetchUsers() {
       const settings = await getUsers();
-      this.users = settings;
-      console.log("post", settings);
+      this.users = settings.users;
+      this.auth = settings.auth;
+      console.log("post", settings.auth);
     },
   },
 });
