@@ -34,5 +34,9 @@ export const useUsersStore = defineStore("usersStore", {
       
       console.log("post", settings);
     },
+
+    removeUser(id: number){
+      this.users = this.users.filter((p) => p.id !== id)
+    }
   },
 });

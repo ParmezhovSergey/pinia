@@ -1,18 +1,42 @@
 <template>
-  <div @click="" class="users">
+  <div @click="setOpen" class="users">
     <div class="user">{{ props.user.name }}</div>
     <div class="user">{{ props.user.city }}</div>
     <div class="user">{{ props.user.age }}</div>
+    <button class="userBtn" @click.stop="deleteUser" >Удалить</button>
   </div>
+<div  v-if="isOpen===true">
+    <UserInfo  :user="props.user" @back="setClose"/>
+</div>
+  
 </template>
 
 <script setup lang="ts">
 import { defineProps } from "vue";
-import type { IUser } from "@/stores/usersStore";
+import { ref } from "vue";
+import { useUsersStore, type IUser } from "@/stores/usersStore";
+import UserInfo from "./UserInfo.vue";
+
 interface Props {
   user: IUser;
 }
 const props = defineProps<Props>();
+const usersStore = useUsersStore();
+
+const isOpen = ref(false)
+
+const setOpen = () => {
+    isOpen.value = true
+}
+const setClose = () => {
+    isOpen.value = false
+}
+
+const deleteUser = () => {
+  usersStore.removeUser(props.user.id);
+};
+
+
 </script>
 
 <style scoped>
@@ -32,5 +56,15 @@ const props = defineProps<Props>();
   width: 200px;
   display: flex;
   justify-content: center;
+}
+.userBtn {
+  width: 70px;
+  display: flex;
+  justify-content: center;
+  border-radius: 5px;
+}
+.userBtn:hover {
+  background-color: red;
+  color: white;
 }
 </style>

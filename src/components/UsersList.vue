@@ -1,11 +1,10 @@
 <template>
-    <div class="title">
-        Список сотрудников
-    </div>
+  <div class="title">Список сотрудников</div>
   <div class="header">
     <div class="user">Имя</div>
     <div class="user">Город</div>
     <div class="user">Возраст</div>
+    <div class="userRemove"></div>
   </div>
   <div>
     <UserItem v-for="user in props.users" :user="user" :key="user.id" />
@@ -22,11 +21,11 @@ const props = defineProps({
 </script>
 
 <style scoped>
-.title{
-    padding-top: 15px;
-    font-size: 20px;
-    display: flex;
-    justify-content: center;
+.title {
+  padding-top: 15px;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
 }
 .header {
   padding: 15px;
@@ -41,6 +40,11 @@ const props = defineProps({
 }
 .user {
   width: 200px;
+  display: flex;
+  justify-content: center;
+}
+.userRemove {
+  width: 70px;
   display: flex;
   justify-content: center;
 }
