@@ -31,7 +31,9 @@
       </div>
       <div class="btn">
         <button class="btnBack" @click="$emit('back')">Назад</button>
-        <button class="btnSave" @click="">Сохранить</button>
+        <button class="btnSave" @click="$emit('back'), changeUser(newUser)">
+          Сохранить
+        </button>
       </div>
     </div>
   </div>
@@ -40,23 +42,34 @@
 <script setup lang="ts">
 import { defineProps } from "vue";
 import { ref } from "vue";
-import { type IUser } from "@/stores/usersStore";
+import { useUsersStore, type IUser } from "@/stores/usersStore";
 
 interface Props {
   user: IUser;
 }
 interface MyObject {
+  id: number;
   name: string;
   city: string;
   age: number | null;
 }
 const props = defineProps<Props>();
+const usersStore = useUsersStore();
 
-const newUser = ref<MyObject>({ name: "", city: "", age: null });
+const newUser = ref<MyObject>({
+  id: props.user.id,
+  name: "",
+  city: "",
+  age: null,
+});
 
 newUser.value.name = props.user.name;
 newUser.value.city = props.user.city;
 newUser.value.age = props.user.age;
+
+const changeUser = (newUser: IUser) => {
+  usersStore.changeUsers(newUser);
+};
 </script>
 
 <style scoped>

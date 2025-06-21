@@ -4,7 +4,7 @@ import { getUsers } from "./api";
 export interface IUser {
   id: number;
   name: string;
-  age: number;
+  age: number | null;
   city: string;
 }
 interface IAuth {
@@ -37,6 +37,16 @@ export const useUsersStore = defineStore("usersStore", {
 
     removeUser(id: number){
       this.users = this.users.filter((p) => p.id !== id)
+    },
+
+    changeUsers(newUser: IUser) {
+      const newUsers = this.users.map((obj)=> {
+        if (obj.id === newUser.id) {
+          return newUser;
+        }
+        return obj;
+      })
+      this.users = newUsers
     }
   },
 });
