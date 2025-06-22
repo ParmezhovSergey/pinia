@@ -7,6 +7,7 @@ export interface IUser {
   age: number | null;
   city: string;
 }
+
 interface IAuth {
   login: string;
   pass: string;
@@ -19,6 +20,7 @@ interface IAuth {
 export const useUsersStore = defineStore("usersStore", {
   state: () => ({
     users: [] as IUser[],
+    userCity: [] as IUser[],
     auth: {
       login: 'user',
       pass: 'pass'
@@ -32,7 +34,15 @@ export const useUsersStore = defineStore("usersStore", {
       const settings = await getUsers();
       this.users = settings.users;
       
-      console.log("post", settings);
+
+      const uniqueData = settings.users.filter((item: { city: string; }, index: number, self: IUser[]) =>
+        index === self.findIndex((t) => (
+          t.city === item.city
+        ))
+      );
+
+      this.userCity = uniqueData
+      console.log('settings', this.userCity);
     },
 
     removeUser(id: number){

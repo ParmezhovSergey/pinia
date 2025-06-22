@@ -2,9 +2,9 @@
   <div class="header">
     <button class="btn" @click="router.push(`/`);">Выход</button>
   </div>
-  <div class="menu">
-    menu
-  </div>
+  
+    <UsersFilter class="menu"/>
+  
   <div class="page">
     <UsersList :users="usersStore.users" />
   </div>
@@ -14,6 +14,7 @@
 import { useRouter } from "vue-router";
 import { useUsersStore } from "../stores/usersStore";
 import UsersList from "@/components/UsersList.vue";
+import UsersFilter from "@/components/UsersFilter.vue";
 
 const usersStore = useUsersStore();
 usersStore.fetchUsers();

@@ -8,7 +8,7 @@
           type="text"
           placeholder="Имя"
           v-model="newUser.name"
-          style="margin-left: 30px"
+          style="margin-left: 30px; border-radius: 5px"
         />
       </div>
       <div class="city">
@@ -17,7 +17,7 @@
           type="text"
           placeholder="Город"
           v-model="newUser.city"
-          style="margin-left: 19px"
+          style="margin-left: 19px; border-radius: 5px"
         />
       </div>
       <div class="age">
@@ -26,7 +26,7 @@
           type="text"
           placeholder="Возраст"
           v-model="newUser.age"
-          style="margin-left: 4px"
+          style="margin-left: 4px; border-radius: 5px"
         />
       </div>
       <div class="btn">
