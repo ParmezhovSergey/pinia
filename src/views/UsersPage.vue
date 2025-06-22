@@ -6,12 +6,13 @@
     <UsersFilter class="menu"/>
   
   <div class="page">
-    <UsersList :users="usersStore.users" />
+    <UsersList :users="usersStore.usersFilter" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { useRouter } from "vue-router";
+
 import { useUsersStore } from "../stores/usersStore";
 import UsersList from "@/components/UsersList.vue";
 import UsersFilter from "@/components/UsersFilter.vue";
@@ -19,6 +20,10 @@ import UsersFilter from "@/components/UsersFilter.vue";
 const usersStore = useUsersStore();
 usersStore.fetchUsers();
 const router = useRouter();
+
+console.log('usersFilter',usersStore.usersFilter);
+
+
 
 
 </script>

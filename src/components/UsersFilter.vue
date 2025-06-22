@@ -4,10 +4,10 @@
       <input type="text" placeholder="поиск..." />
     </div>
     <div class="btn">
-      <button >Поиск</button>
+      <button>Поиск</button>
     </div>
     <div class="filter">
-      <select>
+      <select @change="updateSelectedOption">
         <option value="" disabled selected>Выберите город...</option>
         <option
           v-for="city in usersStore.userCity"
@@ -23,8 +23,16 @@
 
 <script setup lang="ts">
 import { useUsersStore } from "@/stores/usersStore";
+import { ref } from "vue";
 
 const usersStore = useUsersStore();
+const cityUs = ref<string>("");
+
+const updateSelectedOption = (event: any) => {
+  usersStore.setSelectedOption(event.target.value);
+  console.log('usersFilter', usersStore.usersFilter);
+  
+}; 
 
 
 </script>
