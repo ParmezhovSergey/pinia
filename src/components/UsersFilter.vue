@@ -8,7 +8,7 @@
     </div>
     <div class="filter">
       <select @change="updateSelectedOption">
-        <option value="" disabled selected>Выберите город...</option>
+        <option value="" >Все города</option>
         <option
           v-for="city in usersStore.userCity"
           :value="city.city"
@@ -24,9 +24,7 @@
 <script setup lang="ts">
 import { useUsersStore } from "@/stores/usersStore";
 
-
 const usersStore = useUsersStore();
-
 
 const updateSelectedOption = (event: any) => {
   usersStore.setSelectedOption(event.target.value);
