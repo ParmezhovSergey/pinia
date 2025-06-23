@@ -13,27 +13,43 @@ interface IAuth {
   pass: string;
 }
 
-// interface initialState {
-//   users: Array<IUser>;
-// }
+interface initialState {
+  users: Array<IUser>;
+  userCity: Array<IUser>;
+  auth: IAuth;
+  city: string;
+  searchQuery: string;
+}
 
 export const useUsersStore = defineStore("usersStore", {
-  state: () => ({
-    users: [] as IUser[],
-    userCity: [] as IUser[],
+  state: (): initialState => ({
+    users: [],
+    userCity: [],
     auth: {
       login: "user",
       pass: "pass",
-    } as IAuth,
-    city: "" as string,
+    },
+    city: "",
+    searchQuery: "",
   }),
 
   getters: {
     usersFilter(state) {
       if (state.city !== "") {
-        return state.users.filter((item) => item.city === state.city);
+        return state.users.filter(
+          (item: { city: string }) => item.city === state.city
+        );
       } else {
         return state.users;
+      }
+    },
+    searchUser(state: any) {
+      if (state.searchQuery !== "") {
+        return state.usersFilter.filter((item: { name: string }) =>
+          item.name.toLowerCase().includes(state.searchQuery.toLowerCase())
+        );
+      } else {
+        return state.usersFilter;
       }
     },
   },
@@ -68,6 +84,9 @@ export const useUsersStore = defineStore("usersStore", {
 
     setSelectedOption(city: string) {
       this.city = city;
+    },
+    setSearchQuery(name: string) {
+      this.searchQuery = name;
     },
   },
 });

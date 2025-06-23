@@ -1,12 +1,12 @@
 <template>
   <div class="header">
-    <button class="btn" @click="router.push(`/`);">Выход</button>
+    <button class="btn" @click="router.push(`/`)">Выход</button>
   </div>
-  
-    <UsersFilter class="menu"/>
-  
+
+  <UsersFilter class="menu" />
+
   <div class="page">
-    <UsersList :users="usersStore.usersFilter" />
+    <UsersList :users="usersStore.searchUser" />
   </div>
 </template>
 
@@ -21,11 +21,7 @@ const usersStore = useUsersStore();
 usersStore.fetchUsers();
 const router = useRouter();
 
-console.log('usersFilter',usersStore.usersFilter);
-
-
-
-
+console.log("usersFilter", usersStore.usersFilter);
 </script>
 
 <style scoped>
@@ -36,9 +32,8 @@ console.log('usersFilter',usersStore.usersFilter);
   align-items: center;
   justify-content: flex-end;
   border-radius: 5px;
-
 }
-.btn{
+.btn {
   margin-right: 10px;
   border-radius: 5px;
 }
@@ -47,7 +42,7 @@ console.log('usersFilter',usersStore.usersFilter);
   height: calc(100vh - 140px);
   border-radius: 5px;
 }
-.menu{
+.menu {
   height: 70px;
   border-radius: 5px;
   background-color: rgb(250, 228, 193);

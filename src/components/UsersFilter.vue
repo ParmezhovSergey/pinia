@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <div class="search">
-      <input type="text" placeholder="поиск..." />
+      <input type="text" placeholder="поиск..." @input="updateSearch" />
     </div>
     <div class="btn">
       <button>Поиск</button>
@@ -23,18 +23,19 @@
 
 <script setup lang="ts">
 import { useUsersStore } from "@/stores/usersStore";
-import { ref } from "vue";
+
 
 const usersStore = useUsersStore();
-const cityUs = ref<string>("");
+
 
 const updateSelectedOption = (event: any) => {
   usersStore.setSelectedOption(event.target.value);
-  console.log('usersFilter', usersStore.usersFilter);
-  
-}; 
-
-
+  console.log("usersFilter", usersStore.usersFilter);
+};
+const updateSearch = (event: any) => {
+  usersStore.setSearchQuery(event.target.value);
+  console.log("updateSearch", event.target.value);
+};
 </script>
 
 <style scoped>
